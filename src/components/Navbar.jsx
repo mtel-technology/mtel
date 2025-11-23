@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Store as StoreIcon, ShoppingBag, Package, User } from 'lucide-react';
+import { Home, Store as StoreIcon, ShoppingBag, Package, User, Wrench } from 'lucide-react';
 import logo from '../assets/logo.png';
 import { useCart } from '../context/CartContext';
 import './Navbar.css';
@@ -60,6 +60,10 @@ const Navbar = () => {
                 <Link to="/track-order" className={`nav-item ${location.pathname === '/track-order' ? 'active' : ''}`}>
                     <Package size={24} />
                     <span>Track</span>
+                </Link>
+                <Link to="/services" className={`nav-item ${location.pathname === '/services' ? 'active' : ''}`}>
+                    <Wrench size={24} />
+                    <span>Services</span>
                 </Link>
                 <Link to="/cart" className={`nav-item ${location.pathname === '/cart' ? 'active' : ''}`}>
                     <div className="cart-icon-wrapper">
