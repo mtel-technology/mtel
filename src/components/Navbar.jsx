@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, ShoppingBag, Package } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Home, Store as StoreIcon, ShoppingBag, Package, User } from 'lucide-react';
 import logo from '../assets/logo.png';
 import { useCart } from '../context/CartContext';
 import './Navbar.css';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { getCartCount } = useCart();
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -19,49 +19,61 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-            <div className="container navbar-content">
-                <Link to="/" className="logo">
-                    <img src={logo} alt="MTEL" />
+        <>
+            <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+                <div className="container navbar-content">
+                    <Link to="/" className="logo">
+                        <img src={logo} alt="MTEL" />
+                    </Link>
+
+                    <div className="desktop-links">
+                        <Link to="/">Home</Link>
+                        <Link to="/store">Store</Link>
+                        <Link to="/services">Services</Link>
+                        <Link to="/support">Support</Link>
+                        <Link to="/about">About</Link>
+                        <Link to="/contact">Contact</Link>
+                    </div>
+
+                    <div className="nav-icons">
+                        <Link to="/track-order" className="icon-btn" title="Track Order">
+                            <Package size={20} />
+                        </Link>
+                        <Link to="/cart" className="icon-btn cart-icon-btn" title="Shopping Cart">
+                            <ShoppingBag size={20} />
+                            {getCartCount() > 0 && <span className="cart-badge">{getCartCount()}</span>}
+                        </Link>
+                    </div>
+                </div>
+            </nav>
+
+            {/* Mobile Bottom Navigation */}
+            <div className="mobile-bottom-nav">
+                <Link to="/" className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}>
+                    <Home size={24} />
+                    <span>Home</span>
                 </Link>
-
-                <div className="desktop-links">
-                    <Link to="/">Home</Link>
-                    <Link to="/store">Store</Link>
-                    <Link to="/services">Services</Link>
-                    <Link to="/support">Support</Link>
-                    <Link to="/about">About</Link>
-                    <Link to="/contact">Contact</Link>
-                </div>
-
-                <div className="nav-icons">
-                    <Link to="/track-order" className="icon-btn" title="Track Order">
-                        <Package size={20} />
-                    </Link>
-                    <Link to="/cart" className="icon-btn cart-icon-btn" title="Shopping Cart">
-                        <ShoppingBag size={20} />
-                        {getCartCount() > 0 && <span className="cart-badge">{getCartCount()}</span>}
-                    </Link>
-                    <button className="icon-btn mobile-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
-                </div>
+                <Link to="/store" className={`nav-item ${location.pathname === '/store' ? 'active' : ''}`}>
+                    <StoreIcon size={24} />
+                    <span>Shop</span>
+                </Link>
+                <Link to="/track-order" className={`nav-item ${location.pathname === '/track-order' ? 'active' : ''}`}>
+                    <Package size={24} />
+                    <span>Track</span>
+                </Link>
+                <Link to="/cart" className={`nav-item ${location.pathname === '/cart' ? 'active' : ''}`}>
+                    <div className="cart-icon-wrapper">
+                        <ShoppingBag size={24} />
+                        {getCartCount() > 0 && <span className="mobile-cart-badge">{getCartCount()}</span>}
+                    </div>
+                    <span>Cart</span>
+                </Link>
+                <Link to="/contact" className={`nav-item ${location.pathname === '/contact' ? 'active' : ''}`}>
+                    <User size={24} />
+                    <span>Contact</span>
+                </Link>
             </div>
-
-            {/* Mobile Menu Overlay */}
-            <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
-                <div className="mobile-links">
-                    <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
-                    <Link to="/store" onClick={() => setIsMobileMenuOpen(false)}>Store</Link>
-                    <Link to="/services" onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
-                    <Link to="/support" onClick={() => setIsMobileMenuOpen(false)}>Support</Link>
-                    <Link to="/about" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
-                    <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
-                    <Link to="/track-order" onClick={() => setIsMobileMenuOpen(false)}>Track Order</Link>
-                    <Link to="/cart" onClick={() => setIsMobileMenuOpen(false)}>Cart ({getCartCount()})</Link>
-                </div>
-            </div>
-        </nav>
+        </>
     );
 };
 
