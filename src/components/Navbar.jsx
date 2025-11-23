@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ShoppingBag, Search } from 'lucide-react';
+import { Menu, X, ShoppingBag, Package } from 'lucide-react';
 import logo from '../assets/logo.png';
 import { useCart } from '../context/CartContext';
 import './Navbar.css';
@@ -35,7 +35,10 @@ const Navbar = () => {
                 </div>
 
                 <div className="nav-icons">
-                    <Link to="/cart" className="icon-btn cart-icon-btn">
+                    <Link to="/track-order" className="icon-btn" title="Track Order">
+                        <Package size={20} />
+                    </Link>
+                    <Link to="/cart" className="icon-btn cart-icon-btn" title="Shopping Cart">
                         <ShoppingBag size={20} />
                         {getCartCount() > 0 && <span className="cart-badge">{getCartCount()}</span>}
                     </Link>
@@ -54,6 +57,8 @@ const Navbar = () => {
                     <Link to="/support" onClick={() => setIsMobileMenuOpen(false)}>Support</Link>
                     <Link to="/about" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
                     <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
+                    <Link to="/track-order" onClick={() => setIsMobileMenuOpen(false)}>Track Order</Link>
+                    <Link to="/cart" onClick={() => setIsMobileMenuOpen(false)}>Cart ({getCartCount()})</Link>
                 </div>
             </div>
         </nav>

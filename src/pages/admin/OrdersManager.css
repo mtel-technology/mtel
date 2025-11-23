@@ -1,0 +1,41 @@
+.status-select {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.status-select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.order-items-row {
+    background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.order-items {
+    padding: var(--spacing-md);
+}
+
+.order-items h4 {
+    margin-bottom: var(--spacing-md);
+}
+
+.items-table {
+    width: 100%;
+    margin-bottom: var(--spacing-md);
+}
+
+.items-table th,
+.items-table td {
+    padding: var(--spacing-sm);
+    text-align: left;
+}
+
+.items-table thead {
+    background: rgba(255, 255, 255, 0.05);
+}

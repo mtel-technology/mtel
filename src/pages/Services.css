@@ -94,3 +94,62 @@
         padding: var(--spacing-xl) var(--spacing-lg);
     }
 }
+
+/* Success Modal Styles */
+.success-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(4px);
+}
+
+.success-modal {
+    background: var(--color-surface);
+    padding: var(--spacing-xxl);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-icon {
+    color: #10b981;
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    justify-content: center;
+}
+
+.success-modal h2 {
+    margin: 0 0 var(--spacing-md) 0;
+    font-size: 1.75rem;
+}
+
+.success-modal p {
+    color: var(--color-text-secondary);
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.success-modal .btn {
+    margin-top: var(--spacing-lg);
+}

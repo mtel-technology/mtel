@@ -1,0 +1,253 @@
+.order-tracking-page {
+    min-height: 100vh;
+    background: var(--color-bg);
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xl);
+}
+
+.tracking-form-card {
+    max-width: 600px;
+    margin: 0 auto var(--spacing-xl);
+    background: var(--color-surface);
+    padding: var(--spacing-xl);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.order-details-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--color-surface);
+    padding: var(--spacing-xl);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: var(--spacing-xl);
+}
+
+.order-header h2 {
+    margin: 0 0 var(--spacing-xs) 0;
+}
+
+.order-date {
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.order-status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.status-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.status-icon.pending {
+    color: #f59e0b;
+}
+
+.status-icon.processing {
+    color: #3b82f6;
+}
+
+.status-icon.completed {
+    color: #10b981;
+}
+
+.status-icon.cancelled {
+    color: #ef4444;
+}
+
+.status-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.status-text.pending {
+    color: #f59e0b;
+}
+
+.status-text.processing {
+    color: #3b82f6;
+}
+
+.status-text.completed {
+    color: #10b981;
+}
+
+.status-text.cancelled {
+    color: #ef4444;
+}
+
+.order-timeline {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-xxl);
+    position: relative;
+}
+
+.order-timeline::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+.timeline-step {
+    flex: 1;
+    position: relative;
+    text-align: center;
+}
+
+.timeline-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    margin: 0 auto var(--spacing-sm);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.timeline-step.active .timeline-dot {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.timeline-content h4 {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+}
+
+.timeline-content p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.timeline-step.active .timeline-content h4 {
+    color: var(--color-accent);
+}
+
+.order-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.info-section {
+    background: rgba(255, 255, 255, 0.02);
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+}
+
+.info-section h3 {
+    font-size: 1.1rem;
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+.info-section p {
+    margin: 0 0 8px 0;
+    color: var(--color-text-secondary);
+}
+
+.order-items-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--spacing-lg);
+}
+
+.order-items-section h3 {
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+.items-list {
+    margin-bottom: var(--spacing-lg);
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.order-item h4 {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+}
+
+.order-item p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.item-price p {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 8px;
+}
+
+.order-total h3 {
+    margin: 0;
+}
+
+.total-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .order-header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .order-timeline {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+
+    .order-timeline::before {
+        display: none;
+    }
+
+    .order-info-grid {
+        grid-template-columns: 1fr;
+    }
+}

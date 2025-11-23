@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Globe, Send } from 'lucide-react';
 import { supabase } from '../supabase';
+import { CheckCircle } from 'lucide-react';
 import './Services.css';
 
 const Services = () => {
@@ -8,9 +9,10 @@ const Services = () => {
         name: '',
         email: '',
         phone: '',
-        serviceType: 'Website Development',
+        serviceType: '',
         message: ''
     });
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -22,27 +24,35 @@ const Services = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const { error } = await supabase
-                .from('service_requests')
-                .insert([
-                    {
-                        name: formData.name,
-                        email: formData.email,
-                        phone: formData.phone,
-                        service_type: formData.serviceType,
-                        message: formData.message
-                    }
-                ]);
+        const { error } = await supabase
+            .from('service_requests')
+            .insert([
+                {
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    service_type: formData.serviceType,
+                    message: formData.message
+                }
+            ]);
 
-            if (error) throw error;
-
-            alert(`Thank you, ${formData.name}! We have received your application for ${formData.serviceType}. We will contact you shortly.`);
-            setFormData({ name: '', email: '', phone: '', serviceType: 'Website Development', message: '' });
-        } catch (error) {
+        if (error) {
             console.error('Error submitting form:', error);
             alert('There was an error submitting your request. Please try again.');
+        } else {
+            setShowSuccess(true);
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                serviceType: '',
+                message: ''
+            });
         }
+    };
+
+    const handleCloseSuccess = () => {
+        setShowSuccess(false);
     };
 
     return (
@@ -129,6 +139,23 @@ const Services = () => {
                     </div>
                 </div>
             </div>
+
+            {showSuccess && (
+                <div className="success-modal-overlay">
+                    <div className="success-modal">
+                        <div className="success-icon">
+                            <CheckCircle size={64} />
+                        </div>
+                        <h2>Request Submitted!</h2>
+                        <p>Thank you for your service request.</p>
+                        <p>We will contact you shortly to discuss your needs.</p>
+
+                        <button onClick={handleCloseSuccess} className="btn btn-primary">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

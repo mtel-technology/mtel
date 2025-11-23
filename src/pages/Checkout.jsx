@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { supabase } from '../supabase';
+import { generateInvoice } from '../utils/invoiceGenerator';
+import { Download, CheckCircle } from 'lucide-react';
 import './Checkout.css';
 
 const Checkout = () => {
     const { cart, getCartTotal, clearCart } = useCart();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [orderData, setOrderData] = useState(null);
+    const [orderItemsData, setOrderItemsData] = useState([]);
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -70,16 +75,30 @@ const Checkout = () => {
 
             if (itemsError) throw itemsError;
 
-            // Success
-            clearCart();
-            alert('Order placed successfully! We will contact you shortly.');
-            navigate('/');
+            // Store order data for invoice
+            setOrderData(order);
+            setOrderItemsData(orderItems);
+
+            // Show success modal instead of alert
+            setShowSuccess(true);
         } catch (error) {
             console.error('Error placing order:', error);
             alert('There was an error placing your order. Please try again.');
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleDownloadInvoice = () => {
+        if (orderData && orderItemsData) {
+            generateInvoice(orderData, orderItemsData);
+        }
+    };
+
+    const handleCloseSuccess = () => {
+        clearCart();
+        setShowSuccess(false);
+        navigate('/');
     };
 
     return (
@@ -241,6 +260,29 @@ const Checkout = () => {
                     </div>
                 </div>
             </div>
+
+            {showSuccess && (
+                <div className="success-modal-overlay">
+                    <div className="success-modal">
+                        <div className="success-icon">
+                            <CheckCircle size={64} />
+                        </div>
+                        <h2>Order Placed Successfully!</h2>
+                        <p>Thank you for your order. We will contact you shortly.</p>
+                        <p className="order-id">Order ID: #{orderData?.id}</p>
+
+                        <div className="modal-actions">
+                            <button onClick={handleDownloadInvoice} className="btn btn-secondary">
+                                <Download size={20} />
+                                Download Invoice
+                            </button>
+                            <button onClick={handleCloseSuccess} className="btn btn-primary">
+                                Continue Shopping
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
