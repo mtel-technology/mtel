@@ -1,0 +1,56 @@
+.support-hero {
+    background: var(--color-surface);
+    padding: 150px 0 80px;
+    text-align: center;
+}
+
+.support-hero h1 {
+    margin-bottom: var(--spacing-lg);
+}
+
+.search-box {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 16px 16px 16px 50px;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    font-size: 1.1rem;
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-secondary);
+}
+
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.topic-card {
+    padding: var(--spacing-lg);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    transition: all var(--transition-fast);
+}
+
+.topic-card:hover {
+    background: var(--color-surface);
+    border-color: var(--color-accent);
+}
+
+.topic-card svg {
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+}
